@@ -240,8 +240,10 @@ func CachedOption(enabled bool) Option {
 }
 
 func TokenManagerOption(tokenManager TokenManager) Option {
-
 	return func(cfg *ClientConfig) error {
+		if tokenManager == nil {
+			tokenManager = DefaultTokenManager{}
+		}
 		cfg.TokenManager = tokenManager
 		return nil
 	}
